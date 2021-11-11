@@ -12,7 +12,7 @@ FAI
 
 Universidad del Comahue
 
-##Integrantes del equipo
+## Integrantes del equipo
 
 ## Grupo 16
 

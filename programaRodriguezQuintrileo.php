@@ -6,7 +6,7 @@ include_once("tateti.php");
 /**************************************/
 
 /* Apellido, Nombre. Legajo. Carrera. mail. Usuario Github */
-/* ... COMPLETAR ... */
+/* ... Rodriguez Francisco. FAI-1094. TDW. francisco.rodriguez@est.fi.uncoma.edu.ar. https://github.com/frlawer/ ... */
 
 
 
@@ -16,12 +16,82 @@ include_once("tateti.php");
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
+/**
+ * Punto 1
+ * Que hace?
+ * @param mixed $var
+ * @return mixed
+ */
 
+ /**
+ * Punto 2
+ * Que hace?
+ * @param mixed $var
+ * @return mixed
+ */
 
+ /**
+ * Punto 3
+ * Que hace?
+ * @param mixed $var
+ * @return mixed
+ */
 
+ /**
+ * Punto 4
+ * Que hace?
+ * @param mixed $var
+ * @return mixed
+ */
 
+ /**
+ * Punto 5
+ * Que hace?
+ * @param mixed $var
+ * @return mixed
+ */
 
+ /**
+ * Punto 6
+ * Que hace?
+ * @param mixed $var
+ * @return mixed
+ */
 
+/**
+ * Punto 7
+ * Que hace?
+ * @param mixed $var
+ * @return mixed
+ */
+
+ /**
+ * Punto 8
+ * Que hace?
+ * @param mixed $var
+ * @return mixed
+ */
+
+/**
+ * Punto 9
+ * Que hace?
+ * @param mixed $var
+ * @return mixed
+ */
+
+ /**
+ * Punto 10
+ * Que hace?
+ * @param mixed $var
+ * @return mixed
+ */
+
+ /**
+ * Punto 11
+ * Que hace?
+ * @param mixed $var
+ * @return mixed
+ */
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
@@ -35,7 +105,7 @@ include_once("tateti.php");
 
 //Proceso:
 
-$juego = jugar();
+// $juego = jugar();
 //print_r($juego);
 //imprimirResultado($juego);
 
