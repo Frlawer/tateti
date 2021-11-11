@@ -25,10 +25,31 @@ include_once("tateti.php");
 
  /**
  * Punto 2
- * Que hace?
- * @param mixed $var
- * @return mixed
+ * Muestra el menu y retorna la opcion seleccionada
+ * @return int
  */
+function seleccionarOpcion()
+{
+    // array $menu,
+    // int $opcion
+    $menu = [
+        "1) Jugar Tateti",
+        "2) Mostrar un juego",
+        "3) Mostrar el primer juego ganado",
+        "4) Mostrar porcentaje de Juegos ganados",
+        "5) Mostrar resumen de Jugador",
+        "6) Mostrar listado de juegos Ordenado por jugador O",
+        "7) Salir"
+    ];
+
+    echo "Selecciona una opción del Menú: \n";
+    foreach ($menu as $key ) {
+        echo $key . "\n";
+    }
+
+    $opcion = solicitarNumeroEntre(1,7);
+    return $opcion;
+}
 
  /**
  * Punto 3
