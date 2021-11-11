@@ -32,6 +32,7 @@ function seleccionarOpcion()
 {
     // array $menu,
     // int $opcion
+    // inicio una array $menu donde están todas las opciones
     $menu = [
         "1) Jugar Tateti",
         "2) Mostrar un juego",
@@ -41,12 +42,12 @@ function seleccionarOpcion()
         "6) Mostrar listado de juegos Ordenado por jugador O",
         "7) Salir"
     ];
-
     echo "Selecciona una opción del Menú: \n";
     foreach ($menu as $key ) {
         echo $key . "\n";
     }
-
+    
+    // solicito que ingrese una opcion entre 1 y 7 usando la funcion del archivo tateti.php
     $opcion = solicitarNumeroEntre(1,7);
     return $opcion;
 }
