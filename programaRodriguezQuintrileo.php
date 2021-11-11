@@ -61,10 +61,37 @@ function seleccionarOpcion()
 
  /**
  * Punto 4
- * Que hace?
- * @param mixed $var
- * @return mixed
+ * Imprime el resultado de un juego
+ * @param int $numeroJuego
  */
+function mostrarJuego($numeroJuego)
+{
+    // array $datosJuego,
+    // string $resultado, $ganador
+    // int $puntosCruz, $puntosCirculo
+    // redefino variables para mas legibilidad
+    $datosJuego = $coleccionJuegos[$numeroJuego];
+
+    $nombreX = $datosJuego["jugadorCruz"];
+    $nombreO = $datosJuego["jugadorCirculo"];
+    $puntosX = $datosJuego["puntosCruz"];
+    $puntosO = $datosJuego["puntosCirculo"];
+
+    // si son iguales es empate, sino asigno ganador a $resultado
+    if ($puntosX == $puntosO) {
+        $resultado = "(empate)";
+    }elseif ($puntosX > $puntosO) {
+        $resultado = "(ganó X)";
+    }else {
+        $resultado = "(ganó O)";
+    }
+    // imprimo el resultado del juego
+    echo "****************************\n";
+    echo "Juego TATETI: " . $numeroJuego . " " . $resultado . "\n";
+    echo "Jugador X: " . $nombreX . " obtuvo " . $puntosX . "\n";
+    echo "Jugador O: " . $nombreO . " obtuvo " . $puntosO . "\n";
+    echo "****************************\n"; 
+}
 
  /**
  * Punto 5
@@ -123,8 +150,7 @@ function seleccionarOpcion()
 
 
 //Inicialización de variables:
-
-
+$coleccionJuegos = cargarJuegos();
 //Proceso:
 
 // $juego = jugar();
