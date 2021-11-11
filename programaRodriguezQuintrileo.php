@@ -102,10 +102,42 @@ function mostrarJuego($numeroJuego)
 
  /**
  * Punto 6
- * Que hace?
- * @param mixed $var
- * @return mixed
+ * Retorna el indice del primer juego ganado por un jugador
+ * @param string $nombreJugador
+ * @return int
  */
+function primerJuegoGanador($nombreJugador)
+{
+    // int $indice, $cantidadIndices, $i
+    // bool $esGanador
+    $indice = -1;
+    $cantidadIndices = count($coleccionJuegos);
+    $esGanador = false;
+    $i = 0;
+    while ($i < $cantidadIndices && !$esGanador) {
+        // string $jugadorCruz, $jugadorCirculo,
+        // int $puntosCruz, $puntosCirculo
+        $jugadorX = $coleccionJuegos[$i]["jugadorCruz"];
+        $jugadorO = $coleccionJuegos[$i]["jugadorCirculo"];
+        $puntosX = $coleccionJuegos[$i]["puntosCruz"];
+        $puntosO = $coleccionJuegos[$i]["puntosCirculo"];
+
+        if (isset($jugadorX) === is_string($nombreJugador) || isset($jugadorO) === is_string($nombreJugador)) {
+            
+            if ($jugadorX === $nombreJugador && $puntosX > $puntosO) {
+                // Ganador X
+                $indice = $i;
+                $esGanador = true;
+            }elseif ($jugadorO === $nombreJugador && $puntosX < $puntosO) {
+                // Ganador O
+                $indice = $i;
+                $esGanador = true;
+            }
+        }
+        $i++;
+    }
+    return $indice;
+}
 
 /**
  * Punto 7
