@@ -130,24 +130,25 @@ function agregarJuegos($juegosTotal, $nuevoJuego)
  /**
  * Punto 6
  * Retorna el indice del primer juego ganado por un jugador
+ * @param array $juegosTotal
  * @param string $nombreJugador
  * @return int
  */
-function primerJuegoGanado($nombreJugador)
+function primerJuegoGanado($juegosTotal, $nombreJugador)
 {
     // int $indice, $cantidadIndices, $i
     // bool $esGanador
     $indice = -1;
-    $cantidadIndices = count($coleccionJuegos);
+    $cantidadIndices = count($juegosTotal);
     $esGanador = false;
     $i = 0;
     while ($i < $cantidadIndices && !$esGanador) {
         // string $jugadorCruz, $jugadorCirculo,
         // int $puntosCruz, $puntosCirculo
-        $jugadorX = $coleccionJuegos[$i]["jugadorCruz"];
-        $jugadorO = $coleccionJuegos[$i]["jugadorCirculo"];
-        $puntosX = $coleccionJuegos[$i]["puntosCruz"];
-        $puntosO = $coleccionJuegos[$i]["puntosCirculo"];
+        $jugadorX = $juegosTotal[$i]["jugadorCruz"];
+        $jugadorO = $juegosTotal[$i]["jugadorCirculo"];
+        $puntosX = $juegosTotal[$i]["puntosCruz"];
+        $puntosO = $juegosTotal[$i]["puntosCirculo"];
 
         if (isset($jugadorX) === is_string($nombreJugador) || isset($jugadorO) === is_string($nombreJugador)) {
             
@@ -273,17 +274,17 @@ do {
             break;
         case 2: 
             // 2) Mostrar un juego:
-            echo "Ingrese el número de un juego para mostrar";
-            $nJuego = trim(fgets(STDIN));
-            mostrarJuego($juegosTotal, $juego);
+            echo "Ingresar el número de juego entre 0 y ".count($juegosTotal)."\n";
+            $numero = numeroEntre(0, count($juegosTotal));
+            mostrarJuego($juegosTotal, isset($numero));
             break;
         case 3: 
             // 3) Mostrar el primer juego ganado:
             echo "Ingrese el nombre del jugador: \n";
-            $nombreJugador = trim(fgets(STDIN));
-            $indicePrimerJuego = primerJuegoGanado($nombreJugador);
+            $nombreJugador = strtoupper(trim(fgets(STDIN)));
+            $indicePrimerJuego = primerJuegoGanado($juegosTotal, $nombreJugador);
             if ($indicePrimerJuego != -1) {
-                echo mostrarJuego($indicePrimerJuego);
+                echo mostrarJuego($juegosTotal, $indicePrimerJuego);
             }else{
                 echo "El jugador " . $nombreJugador . " no ganó ningún juego\n";
             }
