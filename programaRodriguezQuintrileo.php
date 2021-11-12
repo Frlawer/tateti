@@ -204,10 +204,38 @@ function eleccionXO()
 
  /**
  * Punto 10
- * Que hace?
- * @param mixed $var
- * @return mixed
+ * Verifica cuantos juegos ganó según X o O
+ * @param array $coleccionJuegos
+ * @param string $simbolo
+ * @return int
  */
+function cantGanados($coleccionJuegos, $simbolo)
+{
+    // int $juegosGanados, $puntos, $puntosOpuesto
+    // string $simbolo, $simboloOpuesto
+    $juegosGanados = 0;
+
+    if (strtoupper($simbolo) === "X") {
+        $simbolo = "Cruz";
+        $simboloOpuesto = "Circulo";
+    }else {
+        $simbolo = "Circulo";
+        $simboloOpuesto = "Cruz";
+    }
+
+    for ($i=0; $i < count($coleccionJuegos); $i++) { 
+        if (!(empty($coleccionJuegos[$i]["puntos".$simbolo]) === empty($coleccionJuegos[$i]["puntos".$simboloOpuesto]))) {
+            
+            $puntos = $coleccionJuegos[$i]["puntos".$simbolo];
+            $puntosOpuesto = $coleccionJuegos[$i]["puntos".$simboloOpuesto];
+
+            if ($puntos > $puntosOpuesto) {
+                $juegosGanados++;
+            }
+        }
+    }
+    return $juegosGanados;
+}
 
  /**
  * Punto 11
