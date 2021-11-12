@@ -117,10 +117,18 @@ function mostrarJuego($numeroJuego)
 
  /**
  * Punto 5
- * Que hace?
- * @param mixed $var
- * @return mixed
+ * .modifica la coleccion de juegos sumando un juego nuevo
+ * @param array $cargasJuegos
+ * @return array
  */
+function agregarJuegos($cargasJuegos)
+{
+    //array $juegos , $juegosTotales
+    $juegos= CargarJuegos();
+    //array_push — Inserta uno o más elementos al final de un array
+    $juegosTotales=array_push($juegos,$cargasJuegos );
+    return $juegosTotales;
+}
 
  /**
  * Punto 6
