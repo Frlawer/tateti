@@ -118,15 +118,15 @@ function mostrarJuego($numeroJuego)
  /**
  * Punto 5
  * .modifica la coleccion de juegos sumando un juego nuevo
- * @param array $cargasJuegos
+ * @param array $nuevoJuego
  * @return array
  */
-function agregarJuegos($cargasJuegos)
+function agregarJuegos($nuevoJuego)
 {
     //array $juegos , $juegosTotales
     $juegos= CargarJuegos();
     //array_push — Inserta uno o más elementos al final de un array
-    $juegosTotales=array_push($juegos,$cargasJuegos );
+    $juegosTotales=array_push($juegos,$nuevoJuego );
     return $juegosTotales;
 }
 
@@ -253,34 +253,57 @@ function cantGanados($coleccionJuegos, $simbolo)
 
 //Inicialización de variables:
 $coleccionJuegos = cargarJuegos();
+$juegosTotal = $coleccionJuegos;
 //Proceso:
 
-// $juego = jugar();
 //print_r($juego);
 //imprimirResultado($juego);
 
 
 
-/*
 do {
-    $opcion = ...;
-
+    $opcion = seleccionarOpcion();
+    
     
     switch ($opcion) {
         case 1: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
-
+            // 1) Jugar:
+            $juego = jugar();
+            mostrarJuego($juego);
+            $juegosTotal = agregarJuegos($juego);
             break;
         case 2: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
-
+            // 2) Mostrar un juego:
+            echo "Ingrese el número de un juego para mostrar";
+            $nJuego = trim(fgets(STDIN));
+            mostrarJuego($juego);
             break;
         case 3: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
+            // 3) Mostrar el primer juego ganado:
+            echo "Ingrese el nombre del jugador: \n";
+            $nombreJugador = trim(fgets(STDIN));
+            $indicePrimerJuego = primerJuegoGanado($nombreJugador);
+            if ($indicePrimerJuego != -1) {
+                echo mostrarJuego($indicePrimerJuego);
+            }else{
+                echo "El jugador " . $nombreJugador . " no ganó ningún juego\n";
+            }
+            break;
+        case 4:
+            // 4) Mostrar porcentaje de Juegos ganados:
 
             break;
-        
-            //...
+        case 5:
+            // 5) Mostrar resumen de Jugador:
+
+            break;
+        case 6:
+            // 6) Mostrar listado de juegos Ordenado por jugador O:
+
+            break;
+        case 7:
+            // 7) Finalizar programa:
+
+            break;
     }
-} while ($opcion != X);
-*/
+} while ($opcion != 7);
