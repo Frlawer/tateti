@@ -69,10 +69,17 @@ function seleccionarOpcion()
 
  /**
  * Punto 3
- * Que hace?
- * @param mixed $var
- * @return mixed
+ * Implementar una función que solicite al usuario un número entre un rango de valores.Si el número ingresado por el usuario no es válido, la función se encarga de volver a pedirlo.La función retorna un número válido.
+ * @param int $min
+ * @param int $max
+ * @return int
  */
+function numeroEntre($min,$max)
+{
+   //se invoca a la funcion  solicitarNumeroEntre  de tateti que cumple con esta tarea
+   return solicitarNumeroEntre($min,$max);
+
+}
 
  /**
  * Punto 4
