@@ -93,8 +93,8 @@ function mostrarJuego($juegosTotal, $numeroJuego)
     // string $resultado, $ganador
     // int $puntosCruz, $puntosCirculo
     // redefino variables para mas legibilidad
-    $nombreX = $juegosTotal[$numeroJuego]["jugadorCruz"];
-    $nombreO = $juegosTotal[$numeroJuego]["jugadorCirculo"];
+    $nombreX = strtoupper($juegosTotal[$numeroJuego]["jugadorCruz"]);
+    $nombreO = strtoupper($juegosTotal[$numeroJuego]["jugadorCirculo"]);
     $puntosX = $juegosTotal[$numeroJuego]["puntosCruz"];
     $puntosO = $juegosTotal[$numeroJuego]["puntosCirculo"];
 
@@ -145,8 +145,8 @@ function primerJuegoGanado($juegosTotal, $nombreJugador)
     while ($i < $cantidadIndices && !$esGanador) {
         // string $jugadorCruz, $jugadorCirculo,
         // int $puntosCruz, $puntosCirculo
-        $jugadorX = $juegosTotal[$i]["jugadorCruz"];
-        $jugadorO = $juegosTotal[$i]["jugadorCirculo"];
+        $jugadorX = strtoupper($juegosTotal[$i]["jugadorCruz"]);
+        $jugadorO = strtoupper($juegosTotal[$i]["jugadorCirculo"]);
         $puntosX = $juegosTotal[$i]["puntosCruz"];
         $puntosO = $juegosTotal[$i]["puntosCirculo"];
 
