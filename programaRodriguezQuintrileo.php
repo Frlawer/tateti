@@ -106,7 +106,7 @@ function mostrarJuego($numeroJuego)
  * @param string $nombreJugador
  * @return int
  */
-function primerJuegoGanador($nombreJugador)
+function primerJuegoGanado($nombreJugador)
 {
     // int $indice, $cantidadIndices, $i
     // bool $esGanador
@@ -147,11 +147,23 @@ function primerJuegoGanador($nombreJugador)
  */
 
  /**
- * Punto 8
- * Que hace?
- * @param mixed $var
- * @return mixed
- */
+  * Punto 8
+  * Solicita X o O y lo retorna 
+  * @return string 
+  */
+function eleccionXO()
+{
+    // string $eleccion
+    echo "Ingrese un simbolo: Cruz (X) o Circulo (O): \n";
+    $eleccion = strtoupper(trim(fgets(STDIN)));
+    // si el simbolo ingresado NO es igual a X o O consulto nuevamente 
+    while(!($eleccion === "X" or $eleccion === "O")){
+        echo "Simbolo incorrecto, solo pueden ser Cruz (X) o Circulo (O): \n";
+        $eleccion = strtoupper(trim(fgets(STDIN)));
+    }
+    // 
+    return $eleccion;
+}
 
 /**
  * Punto 9
