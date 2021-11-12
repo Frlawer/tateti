@@ -84,20 +84,19 @@ function numeroEntre($min,$max)
  /**
  * Punto 4
  * Imprime el resultado de un juego
+ * @param array $juegosTotal
  * @param int $numeroJuego
  */
-function mostrarJuego($numeroJuego)
+function mostrarJuego($juegosTotal, $numeroJuego)
 {
     // array $datosJuego,
     // string $resultado, $ganador
     // int $puntosCruz, $puntosCirculo
     // redefino variables para mas legibilidad
-    $datosJuego = $coleccionJuegos[$numeroJuego];
-
-    $nombreX = $datosJuego["jugadorCruz"];
-    $nombreO = $datosJuego["jugadorCirculo"];
-    $puntosX = $datosJuego["puntosCruz"];
-    $puntosO = $datosJuego["puntosCirculo"];
+    $nombreX = $juegosTotal[$numeroJuego]["jugadorCruz"];
+    $nombreO = $juegosTotal[$numeroJuego]["jugadorCirculo"];
+    $puntosX = $juegosTotal[$numeroJuego]["puntosCruz"];
+    $puntosO = $juegosTotal[$numeroJuego]["puntosCirculo"];
 
     // si son iguales es empate, sino asigno ganador a $resultado
     if ($puntosX == $puntosO) {
@@ -121,13 +120,11 @@ function mostrarJuego($numeroJuego)
  * @param array $nuevoJuego
  * @return array
  */
-function agregarJuegos($nuevoJuego)
+function agregarJuegos($juegosTotal, $nuevoJuego)
 {
-    //array $juegos , $juegosTotales
-    $juegos= CargarJuegos();
     //array_push — Inserta uno o más elementos al final de un array
-    $juegosTotales=array_push($juegos,$nuevoJuego );
-    return $juegosTotales;
+    array_push($juegosTotal, $nuevoJuego);
+    return $juegosTotal;
 }
 
  /**
@@ -252,8 +249,8 @@ function cantGanados($coleccionJuegos, $simbolo)
 
 
 //Inicialización de variables:
-$coleccionJuegos = cargarJuegos();
-$juegosTotal = $coleccionJuegos;
+$juegosTotal = cargarJuegos();
+
 //Proceso:
 
 //print_r($juego);
@@ -269,14 +266,16 @@ do {
         case 1: 
             // 1) Jugar:
             $juego = jugar();
-            mostrarJuego($juego);
-            $juegosTotal = agregarJuegos($juego);
+            $juegosTotal = agregarJuegos($juegosTotal, $juego);
+            $indice = count($juegosTotal) - 1;
+            mostrarJuego($juegosTotal, $indice);
+            // print_r($indice);
             break;
         case 2: 
             // 2) Mostrar un juego:
             echo "Ingrese el número de un juego para mostrar";
             $nJuego = trim(fgets(STDIN));
-            mostrarJuego($juego);
+            mostrarJuego($juegosTotal, $juego);
             break;
         case 3: 
             // 3) Mostrar el primer juego ganado:
