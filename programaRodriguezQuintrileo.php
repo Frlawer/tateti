@@ -274,9 +274,9 @@ do {
             break;
         case 2: 
             // 2) Mostrar un juego:
-            echo "Ingresar el número de juego entre 0 y ".count($juegosTotal)."\n";
+            echo "Ingresar el número de juego entre 0 y ".(count($juegosTotal)-1)."\n";
             $numero = numeroEntre(0, count($juegosTotal));
-            mostrarJuego($juegosTotal, isset($numero));
+            mostrarJuego($juegosTotal, $numero);
             break;
         case 3: 
             // 3) Mostrar el primer juego ganado:
@@ -290,8 +290,9 @@ do {
             }
             break;
         case 4:
-            // 4) Mostrar porcentaje de Juegos ganados:
-
+            // 4) Mostrar porcentaje de Juegos ganados según el simbolo seleccionado:
+            $simbolo = eleccionXO();
+            
             break;
         case 5:
             // 5) Mostrar resumen de Jugador:
