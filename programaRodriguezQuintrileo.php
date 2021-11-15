@@ -251,6 +251,7 @@ function cantGanados($coleccionJuegos, $simbolo)
 
 //Inicialización de variables:
 $juegosTotal = cargarJuegos();
+$separador = "\n\n\n\n+++++++++++++++++++++++++++++++++\n";
 
 //Proceso:
 
@@ -260,6 +261,8 @@ $juegosTotal = cargarJuegos();
 
 
 do {
+
+    echo $separador;
     $opcion = seleccionarOpcion();
     
     
@@ -292,7 +295,7 @@ do {
         case 4:
             // 4) Mostrar porcentaje de Juegos ganados según el simbolo seleccionado:
             $simbolo = eleccionXO();
-            
+
             break;
         case 5:
             // 5) Mostrar resumen de Jugador:
