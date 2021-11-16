@@ -26,7 +26,7 @@ function cargarJuegos()
     $coleccionJuegos[1]  = ["jugadorCruz"=> "juan" ,"jugadorCirculo" => "pedro","puntosCruz"=> 4,"puntosCirculo" => 0 ];
     $coleccionJuegos[2]  = ["jugadorCruz"=> "fran" ,"jugadorCirculo" => "anibal","puntosCruz"=> 3,"puntosCirculo" => 0 ];
     $coleccionJuegos[3]  = ["jugadorCruz"=> "ramon" ,"jugadorCirculo" => "fran","puntosCruz"=> 0,"puntosCirculo" => 3 ];
-    $coleccionJuegos[4]  = ["jugadorCruz"=> "jose" ,"jugadorCirculo" => "danel","puntosCruz"=> 0,"puntosCirculo" => 4 ];
+    $coleccionJuegos[4]  = ["jugadorCruz"=> "jose" ,"jugadorCirculo" => "daniel","puntosCruz"=> 0,"puntosCirculo" => 4 ];
     $coleccionJuegos[5]  = ["jugadorCruz"=> "majo" ,"jugadorCirculo" => "pepe","puntosCruz"=> 1,"puntosCirculo" => 1 ];
     $coleccionJuegos[6]  = ["jugadorCruz"=> "juan" ,"jugadorCirculo" => "enzo","puntosCruz"=> 5,"puntosCirculo" => 0 ];
     $coleccionJuegos[7]  = ["jugadorCruz"=> "fran" ,"jugadorCirculo" => "ramon","puntosCruz"=> 4,"puntosCirculo" => 0 ];
@@ -93,6 +93,7 @@ function mostrarJuego($juegosTotal, $numeroJuego)
     // string $resultado, $ganador
     // int $puntosCruz, $puntosCirculo
     // redefino variables para mas legibilidad
+    //strtoupper — Convierte un string a mayúsculas
     $nombreX = strtoupper($juegosTotal[$numeroJuego]["jugadorCruz"]);
     $nombreO = strtoupper($juegosTotal[$numeroJuego]["jugadorCirculo"]);
     $puntosX = $juegosTotal[$numeroJuego]["puntosCruz"];
@@ -169,10 +170,17 @@ function primerJuegoGanado($juegosTotal, $nombreJugador)
 
 /**
  * Punto 7
- * Que hace?
- * @param mixed $var
- * @return mixed
+ * a partir de una colección de juegos y el nombre de un jugador, retorna el resumen del jugador .
+ * @param $array $juegosTotal
+ * @param string $nombreJugador
+ * @return array
  */
+function resumenJugador($juegosTotal,$nombreJugador){
+
+        //array $resumen 
+        
+
+
 
  /**
   * Punto 8
@@ -235,12 +243,35 @@ function cantGanados($coleccionJuegos, $simbolo)
     return $juegosGanados;
 }
 
+/**
+ * Punto 11 - funcion de comparación
+ * Compara de a 2 claves para determinar cual es mayor 
+ * @param string $a
+ * @param string $b
+ * @return int
+ */ 
+function comparar($a, $b) {
+    if ($a["jugadorCirculo"] == $b["jugadorCirculo"]) {
+        return 0;
+    }
+    return ($a["jugadorCirculo"] < $b["jugadorCirculo"]) ? -1 : 1;
+}
+
  /**
  * Punto 11
- * Que hace?
- * @param mixed $var
- * @return mixed
- */
+ * Muestra la cantidad de juegos ordenados por nombre jugador O 
+ * @param array $coleccionJuegos)
+ * @return array
+ */ 
+function ordenarColeccion($coleccionJuegos)
+{
+    //Esta función ordena un array tal que los índices de array mantienen sus correlaciones 
+    // con los elementos del array con los que están asociados, 
+    // usando una función de comparación definida por el usuario.
+    uasort($coleccionJuegos, 'comparar');
+    //  muestra información sobre una variable en una forma que es legible por humanos
+    print_r($coleccionJuegos);
+}
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
@@ -307,3 +338,10 @@ do {
             break;
     }
 } while ($opcion != 7);
+
+
+
+
+
+
+}
