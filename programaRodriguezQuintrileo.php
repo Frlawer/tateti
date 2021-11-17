@@ -15,7 +15,8 @@ include_once("tateti.php");
 
 /**
  * Punto 1
- * carga una coleccion de juegos para usar en el programa
+ * carga juegos
+ * * Declara una coleccion multidimencional con juegos para usarse como ejemplo 
  * @param array $coleccionJuegos
  * @return array
  */
@@ -84,7 +85,12 @@ function numeroEntre($min,$max)
 
  /**
  * Punto 4
- * Imprime el resultado de un juego
+ * Mostrar datos de un juego dado con formato 
+ * ************************************
+ * Juego TATETI: 12 (empate)
+ * Jugador X: majo obtuvo 1 puntos.
+ * Jugador O: pepe obtuvo 1 puntos.
+ * ************************************
  * @param array $juegosTotal
  * @param int $numeroJuego
  */
@@ -409,11 +415,15 @@ do {
         case 4:
             // 4) Mostrar porcentaje de Juegos ganados según el simbolo seleccionado:
             $simbolo = eleccionXO();
+            $juegosGanados = juegosGanados($juegosTotal);
 
+            $cantGanados = cantGanados($juegosTotal, $simbolo);
+            $porcentajeGanados = $cantGanados*100/$juegosGanados;
+            echo "El porcentaje de juegos ganados por " . $simbolo . " es del " . round($porcentajeGanados, 2) . "%.\n";
             break;
         case 5:
             // 5) Mostrar resumen de Jugador:
-
+            
             break;
         case 6:
             // 6) Mostrar listado de juegos Ordenado por jugador O:
