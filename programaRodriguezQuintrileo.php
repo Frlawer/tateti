@@ -135,6 +135,7 @@ function agregarJuego($coleccionJuegos, $nuevoJuego)
 /**
  * Punto 6
  * Retorna el indice del primer juego ganado por un jugador
+ * Si el jugador no ganó ningún juego retorna -1
  * @param array $coleccionJuegos
  * @param string $nombreJugador
  * @return int
@@ -298,7 +299,7 @@ function juegosGanados($coleccionJuegos)
  * @param string $simbolo
  * @return int
  */
-function cantGanados($coleccionJuegos, $simbolo)
+function ganadasPorSimbolo($coleccionJuegos, $simbolo)
 {
     // int $juegosGanados, $puntos, $puntosOpuesto
     // string $simbolo, $simboloOpuesto
@@ -363,7 +364,7 @@ function ordenarColeccion($coleccionJuegos)
 //Declaración de variables:
 // array $juegosTotal, $juego, $resumen
 // string $separador, $nombreJugador, $simbolo
-// int $indice, $numero, $indicePrimerJuego, $juegosGanados, $cantGanados 
+// int $indice, $numero, $indicePrimerJuego, $juegosGanados, $ganadasPorSimbolo 
 // float $porcentajeGanados,
 //Inicialización de variables:
 
@@ -407,12 +408,10 @@ do {
 
             // Si es diferente a -1 muestro el juego
             if ($indicePrimerJuego != -1) {
-                echo mostrarJuego($juegosTotal, $indicePrimerJuego);
-                echo $separador;
+                echo mostrarJuego($juegosTotal, $indicePrimerJuego) . $separador;
             } else {
                 // Muestro que el jugador no existe en la coleccion de juegos 
-                echo "El jugador " . $nombreJugador . " no ganó ningún juego";
-                echo $separador;
+                echo "El jugador " . $nombreJugador . " no ganó ningún juego" . $separador;
             }
             break;
         case 4:
@@ -420,13 +419,12 @@ do {
             $simbolo = eleccionXO();
             // asigno a $juegosGanados el retorno de la funcion juegosGanados
             $juegosGanados = juegosGanados($juegosTotal);
-            // asigno a $cantGanados la cantidad de juegos ganados por el simbolo ingresado por el usuario
-            $cantGanados = cantGanados($juegosTotal, $simbolo);
+            // asigno a $ganadasPorSimbolo la cantidad de juegos ganados por el simbolo ingresado por el usuario
+            $ganadasPorSimbolo = ganadasPorSimbolo($juegosTotal, $simbolo);
             // calculo el porcentaje y lo asigno a $porcentajeGanados
-            $porcentajeGanados = $cantGanados * 100 / $juegosGanados;
+            $porcentajeGanados = $ganadasPorSimbolo * 100 / $juegosGanados;
             // muestro por pantalla el resultado del porcentaje
-            echo "El porcentaje de juegos ganados por " . $simbolo . " es del " . round($porcentajeGanados, 2) . "%.";
-            echo $separador;
+            echo "El porcentaje de juegos ganados por " . $simbolo . " es del " . round($porcentajeGanados, 2) . "%." . $separador;
             break;
         case 5:
             //opción 5) Mostrar resumen de Jugador:
