@@ -1,7 +1,7 @@
-.gitignore
+*gitignore*
 *.rbc
 *.fyc
-*.pdf
+TP*.pdf
 *.drawio
 *.code-workspace
 *.png
