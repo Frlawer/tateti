@@ -446,7 +446,7 @@ do {
             break;
         case 7:
             // 7) Finalizar programa:
-
+            echo "Programa finalizado....";
             break;
     }
 } while ($opcion != 7);
