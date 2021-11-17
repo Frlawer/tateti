@@ -114,7 +114,7 @@ function mostrarJuego($coleccionJuegos, $numeroJuego)
     echo "Juego TATETI: " . $numeroJuego . " " . $resultado . "\n";
     echo "Jugador X: " . $nombreX . " obtuvo " . $puntosX . "\n";
     echo "Jugador O: " . $nombreO . " obtuvo " . $puntosO . "\n";
-    echo "****************************\n";
+    echo "****************************";
 }
 
 
@@ -361,12 +361,14 @@ function ordenarColeccion($coleccionJuegos)
 /**************************************/
 
 //Declaración de variables:
-// array $juegosTotal,  
-// string $separador, 
+// array $juegosTotal, $juego, $resumen
+// string $separador, $nombreJugador, $simbolo
+// int $indice, $numero, $indicePrimerJuego, $juegosGanados, $cantGanados 
+// float $porcentajeGanados,
 //Inicialización de variables:
 
 $juegosTotal = cargarJuegos();
-$separador = "\n\n+++++++++++++++++++++++++++++++++\n";
+$separador = "\n----------------------------------\n";
 //Proceso:
 
 do {
@@ -384,6 +386,7 @@ do {
             $indice = count($juegosTotal) - 1;
             // muestro el resultado del juego 
             mostrarJuego($juegosTotal, $indice);
+            echo $separador;
             break;
         case 2:
             // 2) Mostrar un juego:
@@ -392,6 +395,7 @@ do {
             $numero = numeroEntre(0, count($juegosTotal) - 1);
             // muestro el resultado del juego solicitado
             mostrarJuego($juegosTotal, $numero);
+            echo $separador;
             break;
         case 3:
             // 3) Mostrar el primer juego ganado:
@@ -404,9 +408,11 @@ do {
             // Si es diferente a -1 muestro el juego
             if ($indicePrimerJuego != -1) {
                 echo mostrarJuego($juegosTotal, $indicePrimerJuego);
+                echo $separador;
             } else {
                 // Muestro que el jugador no existe en la coleccion de juegos 
-                echo "El jugador " . $nombreJugador . " no ganó ningún juego\n";
+                echo "El jugador " . $nombreJugador . " no ganó ningún juego";
+                echo $separador;
             }
             break;
         case 4:
@@ -419,7 +425,8 @@ do {
             // calculo el porcentaje y lo asigno a $porcentajeGanados
             $porcentajeGanados = $cantGanados * 100 / $juegosGanados;
             // muestro por pantalla el resultado del porcentaje
-            echo "El porcentaje de juegos ganados por " . $simbolo . " es del " . round($porcentajeGanados, 2) . "%.\n";
+            echo "El porcentaje de juegos ganados por " . $simbolo . " es del " . round($porcentajeGanados, 2) . "%.";
+            echo $separador;
             break;
         case 5:
             //opción 5) Mostrar resumen de Jugador:
@@ -431,7 +438,7 @@ do {
 
             // Si el jugador no perdió ni tiene puntos significa que no jugo nunca.
             if ($resumen["juegosPerdidos"] === 0 && $resumen["puntosAcumulados"] === 0) {
-                echo "El jugador " . $nombreJugador . " no jugó ningún juego aún.\n";
+                echo "El jugador " . $nombreJugador . " no jugó ningún juego aún." . $separador;
             } else {
 
                 echo "*************************************\n";
@@ -440,16 +447,17 @@ do {
                 echo "Perdió: " . $resumen["juegosPerdidos"] . " juegos\n";
                 echo "Empató " . $resumen["juegosEmpatados"] . " juegos\n";
                 echo "Total de puntos acumulados: " . $resumen["puntosAcumulados"] . " puntos\n";
-                echo "*************************************\n";
+                echo "*************************************" . $separador;
             }
             break;
         case 6:
             //opción 6) Mostrar listado de juegos Ordenado por jugador O:
             ordenarColeccion($juegosTotal);
+            echo $separador;
             break;
         case 7:
             //opción 6) Mostrar listado de juegos Ordenado por jugador O:
-            echo "Programa finalizado....";
+            echo "Programa finalizado...." . $separador;
             break;
     }
 } while ($opcion != 7);
