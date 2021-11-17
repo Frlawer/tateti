@@ -22,7 +22,6 @@ include_once("tateti.php");
 function cargarJuegos()
 {
     // Cargamos 10 juegos de ejemplo
-<<<<<<< HEAD
     $coleccionJuegos[0]  = ["jugadorCruz"=> "majo" ,"jugadorCirculo" => "pepe","puntosCruz"=> 1,"puntosCirculo" => 1 ];
     $coleccionJuegos[1]  = ["jugadorCruz"=> "juan" ,"jugadorCirculo" => "pedro","puntosCruz"=> 4,"puntosCirculo" => 0 ];
     $coleccionJuegos[2]  = ["jugadorCruz"=> "fran" ,"jugadorCirculo" => "anibal","puntosCruz"=> 3,"puntosCirculo" => 0 ];
@@ -34,19 +33,7 @@ function cargarJuegos()
     $coleccionJuegos[8]  = ["jugadorCruz"=> "jose" ,"jugadorCirculo" => "fran","puntosCruz"=> 3,"puntosCirculo" => 3 ];
     $coleccionJuegos[9]  = ["jugadorCruz"=> "pamela" ,"jugadorCirculo" => "daniel","puntosCruz"=> 0,"puntosCirculo" => 4 ];
     $coleccionJuegos[10] = ["jugadorCruz"=> "andres" ,"jugadorCirculo" => "anibal","puntosCruz"=> 0,"puntosCirculo" => 5 ];
-=======
-    $coleccionJuegos[0]  = ["jugadorCruz"=> "MAJO" ,"jugadorCirculo" => "PEPE","puntosCruz"=> 1,"puntosCirculo" => 1 ];
-    $coleccionJuegos[1]  = ["jugadorCruz"=> "JUAN" ,"jugadorCirculo" => "PEDRO","puntosCruz"=> 4,"puntosCirculo" => 0 ];
-    $coleccionJuegos[2]  = ["jugadorCruz"=> "FRAN" ,"jugadorCirculo" => "ANIBAL","puntosCruz"=> 3,"puntosCirculo" => 0 ];
-    $coleccionJuegos[3]  = ["jugadorCruz"=> "RAMON" ,"jugadorCirculo" => "FRAN","puntosCruz"=> 0,"puntosCirculo" => 3 ];
-    $coleccionJuegos[4]  = ["jugadorCruz"=> "JOSE" ,"jugadorCirculo" => "DANIEL","puntosCruz"=> 0,"puntosCirculo" => 4 ];
-    $coleccionJuegos[5]  = ["jugadorCruz"=> "MAJO" ,"jugadorCirculo" => "PEPE","puntosCruz"=> 1,"puntosCirculo" => 1 ];
-    $coleccionJuegos[6]  = ["jugadorCruz"=> "JUAN" ,"jugadorCirculo" => "ENZO","puntosCruz"=> 5,"puntosCirculo" => 0 ];
-    $coleccionJuegos[7]  = ["jugadorCruz"=> "FRAN" ,"jugadorCirculo" => "RAMON","puntosCruz"=> 4,"puntosCirculo" => 0 ];
-    $coleccionJuegos[8]  = ["jugadorCruz"=> "JOSE" ,"jugadorCirculo" => "FRAN","puntosCruz"=> 3,"puntosCirculo" => 3 ];
-    $coleccionJuegos[9]  = ["jugadorCruz"=> "PAMELA" ,"jugadorCirculo" => "DANIEL","puntosCruz"=> 0,"puntosCirculo" => 4 ];
-    $coleccionJuegos[10] = ["jugadorCruz"=> "ANDRES" ,"jugadorCirculo" => "ANIBAL","puntosCruz"=> 0,"puntosCirculo" => 5 ];
->>>>>>> 7f5beb89e681aee131ae0e551e8aa1ace112bfdc
+
 
     return $coleccionJuegos;
     
@@ -184,16 +171,82 @@ function primerJuegoGanado($juegosTotal, $nombreJugador)
 
 /**
  * Punto 7
- * a partir de una colección de juegos y el nombre de un jugador, retorna el resumen del jugador .
- * @param $array $juegosTotal
+ * Retorna el resumen del jugador 
+ * @param array $coleccionJuegos
  * @param string $nombreJugador
  * @return array
  */
-function resumenJugador($juegosTotal,$nombreJugador){
+function resumenJugador($coleccionJuegos, $nombreJugador)
+{
+    // int $i, $cantidadIndices, $ganados, $perdidos, $empatados, $puntos
+    $i = 0;
+    $cantidadIndices = count($coleccionJuegos);
+    $resumenJugador = [
+        "nombre" => $nombreJugador,
+        "juegosGanados" => 0,
+        "juegosPerdidos" => 0,
+        "juegosEmpatados" => 0,
+        "puntosAcumulados" => 0
+    ];
 
-        //array $resumen 
+    for ($i=0; $i < $cantidadIndices; $i++) { 
+        // string $jugadorCruz, $jugadorCirculo
+        // int $puntosCruz, $puntosCirculo
+        $jugadorCruz = $coleccionJuegos[$i]["jugadorCruz"];
+        $jugadorCirculo = $coleccionJuegos[$i]["jugadorCirculo"];
+        $puntosCruz = $coleccionJuegos[$i]["puntosCruz"];
+        $puntosCirculo = $coleccionJuegos[$i]["puntosCirculo"];
         
+        // verifico si el jugador jugó esta partida
+        if ($jugadorCruz === $nombreJugador || $jugadorCirculo === $nombreJugador) {
+            
+            // verifico si hay empate
+            if ($puntosCruz === $puntosCirculo) {
 
+                // sumo empatados y acumulo puntos
+                $resumenJugador["juegosEmpatados"]++;
+                $resumenJugador["puntosAcumulados"] = $resumenJugador["puntosAcumulados"] + $puntosCruz;
+                
+            // verifico si es jugadorCruz
+            }elseif ($jugadorCruz === $nombreJugador) {
+                
+                // verifico si jugadorCruz ganó
+                if ($puntosCruz > $puntosCirculo) {
+                    
+                    // sumo 1 a ganados y acumulo puntos
+                    $resumenJugador["juegosGanados"]++;
+                    $resumenJugador["puntosAcumulados"] = $resumenJugador["puntosAcumulados"] + $puntosCruz;
+                    
+                // entonces perdió jugadorCruz 
+                }else{
+
+                    // sumo 1 a perdidos
+                    $resumenJugador["juegosPerdidos"]++;
+
+                }
+            // jugador es jugadorCirculo
+            }else{
+                
+                // verifico si jugadorCirculo ganó
+                if($puntosCirculo > $puntosCruz){
+                    
+                    // sumo 1 a ganados y acumulo puntos
+                    $resumenJugador["juegosGanados"]++;
+                    $resumenJugador["puntosAcumulados"] = $resumenJugador["puntosAcumulados"] + $puntosCirculo;
+
+                // entonces perdió jugadorCirculo
+                }else {
+
+                    // sumo 1 a perdidos
+                    $resumenJugador["juegosPerdidos"]++;
+
+                }
+            }
+                
+        }
+    }
+    return $resumenJugador;
+}
 
 
  /**
