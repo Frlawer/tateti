@@ -40,14 +40,14 @@ function cargarJuegos()
 
 /**
  * Punto 2
- * Muestra el menu y retorna la opcion seleccionada
+ * Muestra un menu con opciones y solicita al usuario que ingrese un numero entre las opciones y lo retorna.
  * @return int
  */
 function seleccionarOpcion()
 {
     // array $menu,
     // int $opcion
-    // inicio una array $menu donde están todas las opciones
+    // defino el menu como array
     $menu = [
         "1) Jugar Tateti",
         "2) Mostrar un juego",
@@ -57,26 +57,26 @@ function seleccionarOpcion()
         "6) Mostrar listado de juegos Ordenado por jugador O",
         "7) Salir"
     ];
+    // imprimo el menu con bucle
     echo "Selecciona una opción del Menú: \n";
     foreach ($menu as $key) {
         echo $key . "\n";
     }
-
-    // solicito que ingrese una opcion entre 1 y 7 usando la funcion del archivo tateti.php
-    $opcion = solicitarNumeroEntre(1, 7);
+    // llamo a la funcion numeroEntre() para solicitar un numero y lo retorno.
+    $opcion = numeroEntre(1, 7);
     return $opcion;
 }
 
 /**
  * Punto 3
- * Implementar una función que solicite al usuario un número entre un rango de valores.Si el número ingresado por el usuario no es válido, la función se encarga de volver a pedirlo.La función retorna un número válido.
+ * Solicita un número en el rango [$min,$max]
  * @param int $min
  * @param int $max
- * @return int
+ * @return int 
  */
 function numeroEntre($min, $max)
 {
-    //se invoca a la funcion  solicitarNumeroEntre  de tateti que cumple con esta tarea
+    // retorno lo que la funcion solicitarNumeroEntre devuelva.
     return solicitarNumeroEntre($min, $max);
 }
 
@@ -84,24 +84,22 @@ function numeroEntre($min, $max)
  * Punto 4
  * Mostrar datos de un juego dado con formato 
  * ************************************
- * Juego TATETI: 12 (empate)
- * Jugador X: majo obtuvo 1 puntos.
- * Jugador O: pepe obtuvo 1 puntos.
+ * Juego TATETI: numeroPartido (empate)
+ * Jugador X: nombreX obtuvo puntosX puntos.
+ * Jugador O: nombreO obtuvo puntosO puntos.
  * ************************************
- * @param array $juegosTotal
+ * @param array $coleccionJuegos
  * @param int $numeroJuego
  */
-function mostrarJuego($juegosTotal, $numeroJuego)
+function mostrarJuego($coleccionJuegos, $numeroJuego)
 {
-    // array $datosJuego,
-    // string $resultado, $ganador
-    // int $puntosCruz, $puntosCirculo
+    // string $resultado,$nombreX, $nombreO
+    // int $puntosCirculo, $puntosO
     // redefino variables para mas legibilidad
-    //strtoupper — Convierte un string a mayúsculas
-    $nombreX = strtoupper($juegosTotal[$numeroJuego]["jugadorCruz"]);
-    $nombreO = strtoupper($juegosTotal[$numeroJuego]["jugadorCirculo"]);
-    $puntosX = $juegosTotal[$numeroJuego]["puntosCruz"];
-    $puntosO = $juegosTotal[$numeroJuego]["puntosCirculo"];
+    $nombreX = strtoupper($coleccionJuegos[$numeroJuego]["jugadorCruz"]); //convierto a mayusculas
+    $nombreO = strtoupper($coleccionJuegos[$numeroJuego]["jugadorCirculo"]); //convierto a mayusculas
+    $puntosX = $coleccionJuegos[$numeroJuego]["puntosCruz"];
+    $puntosO = $coleccionJuegos[$numeroJuego]["puntosCirculo"];
 
     // si son iguales es empate, sino asigno ganador a $resultado
     if ($puntosX == $puntosO) {
@@ -119,50 +117,52 @@ function mostrarJuego($juegosTotal, $numeroJuego)
     echo "****************************\n";
 }
 
+
 /**
  * Punto 5
- * .modifica la coleccion de juegos sumando un juego nuevo
+ * Suma un juego a la coleccion de juegos ingresada por parametro
+ * @param array $coleccionJuegos
  * @param array $nuevoJuego
  * @return array
  */
-function agregarJuegos($juegosTotal, $nuevoJuego)
+function agregarJuego($coleccionJuegos, $nuevoJuego)
 {
     //array_push — Inserta uno o más elementos al final de un array
-    array_push($juegosTotal, $nuevoJuego);
-    return $juegosTotal;
+    array_push($coleccionJuegos, $nuevoJuego);
+    return $coleccionJuegos;
 }
 
 /**
  * Punto 6
  * Retorna el indice del primer juego ganado por un jugador
- * @param array $juegosTotal
+ * @param array $coleccionJuegos
  * @param string $nombreJugador
  * @return int
  */
-function primerJuegoGanado($juegosTotal, $nombreJugador)
+function primerJuegoGanado($coleccionJuegos, $nombreJugador)
 {
-    // int $indice, $cantidadIndices, $i
+    // int $indice, $cantidadIndices, $i, $puntosX, $puntosO
     // bool $esGanador
+    // string $jugadorCruz, $jugadorCirculo,
     $indice = -1;
-    $cantidadIndices = count($juegosTotal);
+    $cantidadIndices = count($coleccionJuegos);
     $esGanador = false;
     $i = 0;
     while ($i < $cantidadIndices && !$esGanador) {
-        // string $jugadorCruz, $jugadorCirculo,
-        // int $puntosCruz, $puntosCirculo
-        $jugadorX = strtoupper($juegosTotal[$i]["jugadorCruz"]);
-        $jugadorO = strtoupper($juegosTotal[$i]["jugadorCirculo"]);
-        $puntosX = $juegosTotal[$i]["puntosCruz"];
-        $puntosO = $juegosTotal[$i]["puntosCirculo"];
-
+        // redefino variables para mayor legibilidad
+        $jugadorX = strtoupper($coleccionJuegos[$i]["jugadorCruz"]);
+        $jugadorO = strtoupper($coleccionJuegos[$i]["jugadorCirculo"]);
+        $puntosX = $coleccionJuegos[$i]["puntosCruz"];
+        $puntosO = $coleccionJuegos[$i]["puntosCirculo"];
+        // Si jugador existe dentro de jugadorX o jugadorO
         if (isset($jugadorX) === is_string($nombreJugador) || isset($jugadorO) === is_string($nombreJugador)) {
-
+            // evaluo si jugador es igual a jugadorX y si tiene más puntos
             if ($jugadorX === $nombreJugador && $puntosX > $puntosO) {
-                // Ganador X
+                // Ganó X, asigno al indice el valor del indice del array, modifico la variable bandera
                 $indice = $i;
                 $esGanador = true;
             } elseif ($jugadorO === $nombreJugador && $puntosX < $puntosO) {
-                // Ganador O
+                // Ganó O, asigno al indice el valor del indice del array, modifico la variable bandera
                 $indice = $i;
                 $esGanador = true;
             }
