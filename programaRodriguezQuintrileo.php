@@ -270,10 +270,26 @@ function eleccionXO()
 
 /**
  * Punto 9
- * Que hace?
- * @param mixed $var
- * @return mixed
+ * Retorna la cantidad de juegos ganados
+ * @param array $coleccionJuegos
+ * @return int 
  */
+function juegosGanados($coleccionJuegos)
+{
+    // int $cantidadIndices, $juegosGanados
+    $cantidadIndices = count($coleccionJuegos);
+    $juegosGanados = 0;
+    for($i=0; $i <= $cantidadIndices; $i++){
+        $puntosX = isset($coleccionJuegos[$i]["puntosCruz"]) ? $coleccionJuegos[$i]["puntosCruz"] : "";
+        $puntosO = isset($coleccionJuegos[$i]["puntosCirculo"]) ? $coleccionJuegos[$i]["puntosCirculo"] : "";
+        
+        if($puntosX != $puntosO){
+
+            $juegosGanados++;
+        }
+    }
+    return $juegosGanados;
+}
 
  /**
  * Punto 10
