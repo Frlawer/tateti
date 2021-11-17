@@ -423,7 +423,22 @@ do {
             break;
         case 5:
             // 5) Mostrar resumen de Jugador:
-            
+            echo "Ingrese el nombre del Jugador: ";
+            $nombreJugador = strtoupper(trim(fgets(STDIN)));
+            $resumen = resumenJugador($juegosTotal, $nombreJugador);
+
+            if ($resumen["juegosPerdidos"] === 0 && $resumen["puntosAcumulados"] === 0) {
+                echo "El jugador ". $nombreJugador ." no jugó ningún juego aún.\n";
+            }else {
+                
+                echo "*************************************\n";
+                echo "Jugador: " . $resumen["nombre"] . "\n";
+                echo "Ganó: " . $resumen["juegosGanados"] . " juegos\n";
+                echo "Perdió: " . $resumen["juegosPerdidos"] . " juegos\n";
+                echo "Empató " . $resumen["juegosEmpatados"] . " juegos\n";
+                echo "Total de puntos acumulados: " . $resumen["puntosAcumulados"] . " puntos\n";
+                echo "*************************************\n";
+            }
             break;
         case 6:
             // 6) Mostrar listado de juegos Ordenado por jugador O:
