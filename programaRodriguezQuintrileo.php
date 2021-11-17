@@ -244,7 +244,6 @@ function resumenJugador($coleccionJuegos, $nombreJugador)
     return $resumenJugador;
 }
 
-
 /**
  * Punto 8
  * Solicita X o O y lo retorna 
@@ -254,13 +253,14 @@ function eleccionXO()
 {
     // string $eleccion
     echo "Ingrese un simbolo: Cruz (X) o Circulo (O): \n";
+    // convierto a mayusculas lo que ingresa por teclado
     $eleccion = strtoupper(trim(fgets(STDIN)));
     // si el simbolo ingresado NO es igual a X o O consulto nuevamente 
-    while (!($eleccion === "X" or $eleccion === "O")) {
+    while (!($eleccion === "X" || $eleccion === "O")) {
         echo "Simbolo incorrecto, solo pueden ser Cruz (X) o Circulo (O): \n";
+        // convierto a mayusculas lo que ingresa por teclado
         $eleccion = strtoupper(trim(fgets(STDIN)));
     }
-    // 
     return $eleccion;
 }
 
@@ -276,11 +276,15 @@ function juegosGanados($coleccionJuegos)
     $cantidadIndices = count($coleccionJuegos);
     $juegosGanados = 0;
     for ($i = 0; $i <= $cantidadIndices; $i++) {
+
+        // redefino variables para mayor legibilidad
         $puntosX = isset($coleccionJuegos[$i]["puntosCruz"]) ? $coleccionJuegos[$i]["puntosCruz"] : "";
         $puntosO = isset($coleccionJuegos[$i]["puntosCirculo"]) ? $coleccionJuegos[$i]["puntosCirculo"] : "";
 
+        // Si no hay empate
         if ($puntosX != $puntosO) {
 
+            // sumo 1 a juegosGanados 
             $juegosGanados++;
         }
     }
@@ -289,7 +293,7 @@ function juegosGanados($coleccionJuegos)
 
 /**
  * Punto 10
- * Verifica cuantos juegos ganó según X o O
+ * Verifica cuantos juegos ganó el simbolo ingresado por parametro
  * @param array $coleccionJuegos
  * @param string $simbolo
  * @return int
@@ -338,10 +342,9 @@ function comparar($a, $b)
 }
 
 /**
- * Punto 11
- * Muestra la cantidad de juegos ordenados por nombre jugador O 
+ * Punto 11 - funcion que ordena
+ * Muestra los juegos ordenados por nombre jugador O 
  * @param array $coleccionJuegos)
- * @return array
  */
 function ordenarColeccion($coleccionJuegos)
 {
@@ -358,66 +361,75 @@ function ordenarColeccion($coleccionJuegos)
 /**************************************/
 
 //Declaración de variables:
-
-
+// array $juegosTotal,  
+// string $separador, 
 //Inicialización de variables:
-$juegosTotal = cargarJuegos();
-$separador = "\n\n\n\n+++++++++++++++++++++++++++++++++\n";
 
+$juegosTotal = cargarJuegos();
+$separador = "\n\n+++++++++++++++++++++++++++++++++\n";
 //Proceso:
 
-//print_r($juego);
-//imprimirResultado($juego);
-
-
-
 do {
-
     echo $separador;
+    // invoco funcion para mostrar menu y solicitar ingrese una opcion del mismo
     $opcion = seleccionarOpcion();
-
 
     switch ($opcion) {
         case 1:
-            // 1) Jugar:
+            //opción 1) Jugar:
             $juego = jugar();
-            $juegosTotal = agregarJuegos($juegosTotal, $juego);
+            // agrego el juego a la coleccion $juegosTotal
+            $juegosTotal = agregarJuego($juegosTotal, $juego);
+            // defino la variable indice que cuenta cuantos juegos hay guardados en $juegosTotal y le resto -1 para que sea exacto el indice de la coleccion a la que pertenece el juego
             $indice = count($juegosTotal) - 1;
+            // muestro el resultado del juego 
             mostrarJuego($juegosTotal, $indice);
-            // print_r($indice);
             break;
         case 2:
             // 2) Mostrar un juego:
             echo "Ingresar el número de juego entre 0 y " . (count($juegosTotal) - 1) . "\n";
-            $numero = numeroEntre(0, count($juegosTotal));
+            // asigno a $numero el numero seleccionado por el usuario
+            $numero = numeroEntre(0, count($juegosTotal) - 1);
+            // muestro el resultado del juego solicitado
             mostrarJuego($juegosTotal, $numero);
             break;
         case 3:
             // 3) Mostrar el primer juego ganado:
             echo "Ingrese el nombre del jugador: \n";
+            // asigno a $nombreJugador lo ingresado por teclado y lo convierto a mayusculas
             $nombreJugador = strtoupper(trim(fgets(STDIN)));
+            // asigno a $indicePrimerJuego el return  de la funcion primerJuegoGanado
             $indicePrimerJuego = primerJuegoGanado($juegosTotal, $nombreJugador);
+
+            // Si es diferente a -1 muestro el juego
             if ($indicePrimerJuego != -1) {
                 echo mostrarJuego($juegosTotal, $indicePrimerJuego);
             } else {
+                // Muestro que el jugador no existe en la coleccion de juegos 
                 echo "El jugador " . $nombreJugador . " no ganó ningún juego\n";
             }
             break;
         case 4:
-            // 4) Mostrar porcentaje de Juegos ganados según el simbolo seleccionado:
+            //opción 4) Mostrar porcentaje de Juegos ganados segun simbolo:
             $simbolo = eleccionXO();
+            // asigno a $juegosGanados el retorno de la funcion juegosGanados
             $juegosGanados = juegosGanados($juegosTotal);
-
+            // asigno a $cantGanados la cantidad de juegos ganados por el simbolo ingresado por el usuario
             $cantGanados = cantGanados($juegosTotal, $simbolo);
+            // calculo el porcentaje y lo asigno a $porcentajeGanados
             $porcentajeGanados = $cantGanados * 100 / $juegosGanados;
+            // muestro por pantalla el resultado del porcentaje
             echo "El porcentaje de juegos ganados por " . $simbolo . " es del " . round($porcentajeGanados, 2) . "%.\n";
             break;
         case 5:
-            // 5) Mostrar resumen de Jugador:
+            //opción 5) Mostrar resumen de Jugador:
             echo "Ingrese el nombre del Jugador: ";
+            // asigno a $nombreJugador lo ingresado por teclado y lo convierto a mayusculas
             $nombreJugador = strtoupper(trim(fgets(STDIN)));
+            // asigno a $resumen el retorno de la funcion resumenJugador
             $resumen = resumenJugador($juegosTotal, $nombreJugador);
 
+            // Si el jugador no perdió ni tiene puntos significa que no jugo nunca.
             if ($resumen["juegosPerdidos"] === 0 && $resumen["puntosAcumulados"] === 0) {
                 echo "El jugador " . $nombreJugador . " no jugó ningún juego aún.\n";
             } else {
@@ -432,11 +444,11 @@ do {
             }
             break;
         case 6:
-            // 6) Mostrar listado de juegos Ordenado por jugador O:
+            //opción 6) Mostrar listado de juegos Ordenado por jugador O:
             ordenarColeccion($juegosTotal);
             break;
         case 7:
-            // 7) Finalizar programa:
+            //opción 6) Mostrar listado de juegos Ordenado por jugador O:
             echo "Programa finalizado....";
             break;
     }
