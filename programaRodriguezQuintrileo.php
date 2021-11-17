@@ -442,7 +442,7 @@ do {
             break;
         case 6:
             // 6) Mostrar listado de juegos Ordenado por jugador O:
-
+            ordenarColeccion($juegosTotal);
             break;
         case 7:
             // 7) Finalizar programa:
@@ -456,4 +456,3 @@ do {
 
 
 
-}
