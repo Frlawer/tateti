@@ -18,7 +18,7 @@ Universidad del Comahue
 
 **Francisco Rodriguez** Legajo 1094 - mail: frlawer@gmail.com - usuario github: frlawer
 
-**Ramón Quintrileo** -
+**Ramón Quintrileo** -Legajo 3141 - mail: ramon.quintrileo@est.fi.uncoma.edu.ar - usuario github: ramonfi3141
 
 ## Repositorio
 
