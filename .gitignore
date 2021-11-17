@@ -1,4 +1,4 @@
-*gitignore*
+.gitignore
 *.rbc
 *.fyc
 TP*.pdf
